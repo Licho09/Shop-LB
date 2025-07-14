@@ -26,7 +26,7 @@ const generateProductImages = (product: Product): string[] => {
  if (product.id === '8') {
   // Louis Vuitton wallet – 6 real slides only
   const images = [
-    '/louis-vuitton-multiple-wallet--M61695_PM1_Side view3.png',
+    '/louis-vuitton-multiple-wallet--M61695_PM1_Side-view3.png',
     '/image.png',
     '/slide-3.png',
     '/slide-4.png',
@@ -129,7 +129,7 @@ if (product.id === '15') {
 };
 
 const sampleProducts: Product[] = [
-  { id: '8', name: 'Louis Vuitton Slender Wallet', price: 125, image: '/louis-vuitton-multiple-wallet--M61695_PM1_Side view3.png', category: 'accessories' },
+  { id: '8', name: 'Louis Vuitton Slender Wallet', price: 125, image: '/louis-vuitton-multiple-wallet--M61695_PM1_Side-view3.png', category: 'accessories' },
   
   // ✅ Add your new items below the existing ones
   { id: '9', name: 'Gucci Angelina', price: 850, image: '/shoes/gucci-angelina/slide-1.PNG', category: 'shoes' },
@@ -371,6 +371,11 @@ function App() {
                 src={currentImage}
                 alt={`${selectedProduct.name} - Image ${currentSlide + 1}`}
                 className="w-full h-full object-contain p-4 pb-24"
+                onError={(e) => {
+                  console.error(`Failed to load modal image: ${currentImage}`);
+                  e.currentTarget.style.border = '2px solid red';
+                }}
+                onLoad={() => console.log(`Successfully loaded modal: ${currentImage}`)}
                 style={{
                   maxWidth: '100%',
                   maxHeight: 'calc(100% - 96px)',
@@ -660,6 +665,11 @@ function App() {
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-full object-contain hover:scale-105 transition-transform duration-300 p-2 bg-gray-50"
+                    onError={(e) => {
+                      console.error(`Failed to load featured image: ${product.image}`);
+                      e.currentTarget.style.border = '2px solid red';
+                    }}
+                    onLoad={() => console.log(`Successfully loaded featured: ${product.image}`)}
                   />
                 </div>
                 <div className="p-4">
