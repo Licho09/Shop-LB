@@ -358,8 +358,17 @@ function App() {
     triggerHaptic("medium")
 
     if (platform === "instagram") {
-      const url = `https://www.instagram.com/direct/t/Res3ll.pablito`
-      window.open(url, "_blank")
+      const username = "Res3ll.pablito"
+      const appLink = `instagram://user?username=${username}`
+      const webLink = `https://instagram.com/${username}`
+
+      // Try opening in Instagram app
+      window.location.href = appLink
+
+      // Fallback to web after 1 second
+      setTimeout(() => {
+        window.open(webLink, "_blank")
+      }, 1000)
     } else {
       // Show notification for disabled platforms
       const platformName = platform === "whatsapp" ? "WhatsApp" : "Messenger"
